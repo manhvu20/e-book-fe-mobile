@@ -7,7 +7,6 @@ public class RetrofitInstance {
     private static Retrofit retrofit;
     private static final String BASE_URL = "http://172.16.0.48:3055/";
 
-    // Singleton pattern để chỉ tạo một instance của Retrofit
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
             retrofit = new retrofit2.Retrofit.Builder()
