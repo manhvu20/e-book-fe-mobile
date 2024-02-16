@@ -6,39 +6,27 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ebookmobilefe.R;
+import com.example.ebookmobilefe.databinding.ActivityLoginBinding;
+import com.example.ebookmobilefe.databinding.ActivityMainBinding;
 import com.example.ebookmobilefe.network.RetrofitInstance;
 import com.example.ebookmobilefe.viewmodel.LoginViewModel;
 
 import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
-    private LoginViewModel loginViewModel;
 
+    // Assuming this is in an Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        final EditText etUsername = findViewById(R.id.etUsername);
-        final EditText etPassword = findViewById(R.id.etPassword);
-        Button btnLogin = findViewById(R.id.btnLogin);
 
-        loginViewModel.getLoginResult().observe(this, isSuccess -> {
-            if (isSuccess) {
-                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        btnLogin.setOnClickListener(v -> {
-            String username = etUsername.getText().toString();
-            String password = etPassword.getText().toString();
-            loginViewModel.login(username, password);
-            System.out.println("Username: " + username);
-        });
+        // Binding setup
+        ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        LoginViewModel viewModel = new LoginViewModel();
+        binding.setLoginViewModel(viewModel);
     }
 }
