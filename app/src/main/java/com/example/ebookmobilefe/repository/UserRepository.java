@@ -1,5 +1,8 @@
 package com.example.ebookmobilefe.repository;
 
+import android.app.Application;
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.ebookmobilefe.model.LoginRequest;
@@ -13,28 +16,40 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserRepository {
+    private Application application;
+    private MutableLiveData<LoginResponse> mutableLiveData = new MutableLiveData<>();
 
-    public MutableLiveData<User> getUserData(String userId) {
-        MutableLiveData<User> userData = new MutableLiveData<>();
-        // Implement logic to fetch user data
-        return userData;
+    public UserRepository(Application application) {
+        this.application = application;
+    }
+
+    public static void signOut() {
+    }
+
+    public MutableLiveData<LoginResponse> getLoginResponse() {
+        return mutableLiveData;
     }
 
     public MutableLiveData<Boolean> login(String username, String password) {
         MutableLiveData<Boolean> loginResult = new MutableLiveData<>();
         LoginService loginService = RetrofitInstance.getRetrofitInstance().create(LoginService.class);
-        loginService.loginUser(new LoginRequest(username, password)).enqueue(new Callback<LoginResponse>() {
+
+        LoginRequest request = new LoginRequest(username, password);
+        loginService.loginUser(request).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
+                    // Handle successful response
                     loginResult.setValue(true);
                 } else {
+                    // Handle unsuccessful response, e.g., wrong credentials
                     loginResult.setValue(false);
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
+                // Handle network failure or other system issues
                 loginResult.setValue(false);
             }
         });

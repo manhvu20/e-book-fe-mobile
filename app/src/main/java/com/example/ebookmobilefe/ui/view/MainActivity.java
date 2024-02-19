@@ -13,8 +13,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        LoginViewModel viewModel = new LoginViewModel();
-        binding.setLoginViewModel(viewModel);
+        DataBindingUtil.setContentView(this, R.layout.activity_main);
     }
 }

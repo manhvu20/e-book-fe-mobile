@@ -1,16 +1,21 @@
 package com.example.ebookmobilefe.viewmodel;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.ebookmobilefe.command.AccessCmd.SubmitLoginCommand;
+import com.example.ebookmobilefe.command.AccessCmd.LoginCommand;
+import com.example.ebookmobilefe.command.AccessCmd.SignOutCommand;
+import com.example.ebookmobilefe.command.ICommand;
 import com.example.ebookmobilefe.repository.UserRepository;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> loginResult = new MutableLiveData<>();
-    private UserRepository userRepository = new UserRepository();
+    private UserRepository userRepository;
 
     public LiveData<Boolean> getLoginResult() {
         return loginResult;
@@ -19,24 +24,37 @@ public class LoginViewModel extends ViewModel {
     public final ObservableField<String> Username = new ObservableField<>();
     public final ObservableField<String> Password = new ObservableField<>();
 
-    public SubmitLoginCommand submitLoginCommand;
+    public ICommand loginCommand;
 
-    public LoginViewModel() {
-        submitLoginCommand = this::login;
+    public ICommand signOutCommand;
+
+    public LoginViewModel(@NonNull Application application) {
+        super(application);
+        loginCommand = new LoginCommand(() -> login(Username, Password));
+        signOutCommand = new SignOutCommand(() -> signOut());
+        this.userRepository = new UserRepository(application);
         Username.set("");
         Password.set("");
     }
 
-    public void login(String username, String password) {
-        if(username != null && password != null) {
-            LiveData<Boolean> repoLoginResult = userRepository.login(username, password);
-            repoLoginResult.observeForever(loginResult::setValue);
+    public void login(ObservableField<String> Username, ObservableField<String> Password) {
+        userRepository.login(Username.get(), Password.get()).observe(getApplication(), loginResponse -> {
+            loginResult.setValue(true);
+        });
+    }
+
+    public void signOut() {
+        UserRepository.signOut();
+    }
+
+
+    public void onLoginClicked() {
+        if (((LoginCommand)loginCommand).canExecute()) {
+            loginCommand.execute();
         }
     }
 
-    public void onLoginClicked() {
-        if (submitLoginCommand != null) {
-            submitLoginCommand.execute(Username.get(), Password.get());
-        }
+    public LiveData<Boolean> getNavigateToMain() {
+        return loginResult;
     }
 }
