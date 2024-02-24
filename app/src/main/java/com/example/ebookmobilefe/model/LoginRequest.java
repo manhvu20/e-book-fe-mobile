@@ -1,16 +1,19 @@
 package com.example.ebookmobilefe.model;
 
 public class LoginRequest {
-    private String username;
+    private String email;
     private String password;
 
-    public LoginRequest(String username, String password) {
-        this.username = username;
+    public LoginRequest(String email, String password) {
+        this.email = email;
         this.password = password;
     }
-    public String getUsername() {
-        return username;
+
+    // Getters
+    public String getEmail() {
+        return email;
     }
+
     public String getPassword() {
         return password;
     }
