@@ -3,6 +3,7 @@ package com.example.ebookmobilefe.repository;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.ebookmobilefe.model.LoginRequest;
@@ -16,38 +17,33 @@ import retrofit2.Response;
 
 public class UserRepository {
     private Application application;
-    private MutableLiveData<LoginResponse> mutableLiveData;
 
     public UserRepository(Application application) {
         this.application = application;
     }
 
-    public static void signOut() {
-    }
+    public LiveData<Boolean> login(String username, String password) {
+        final MutableLiveData<Boolean> loginResult = new MutableLiveData<>();
 
-    public MutableLiveData<LoginResponse> getLoginResponse() {
-        return mutableLiveData;
-    }
-
-    public void login(String username, String password) {
-        mutableLiveData = new MutableLiveData<>();
         LoginService loginService = RetrofitInstance.getRetrofitInstance().create(LoginService.class);
         LoginRequest request = new LoginRequest(username, password);
 
         loginService.loginUser(request).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    mutableLiveData.postValue(response.body());
+                if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                    loginResult.postValue(true);
                 } else {
-                    Log.e("Login Error", "Failed to login");
+                    loginResult.postValue(false);
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Log.e("Retrofit Error", t.toString());
+                loginResult.postValue(false);
             }
         });
+
+        return loginResult;
     }
 }

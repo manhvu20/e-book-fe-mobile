@@ -3,56 +3,55 @@ package com.example.ebookmobilefe.viewmodel;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
-import com.example.ebookmobilefe.command.AccessCmd.LoginCommand;
-import com.example.ebookmobilefe.command.AccessCmd.SignOutCommand;
-import com.example.ebookmobilefe.command.ICommand;
+import com.example.ebookmobilefe.model.LoginResponse;
 import com.example.ebookmobilefe.repository.UserRepository;
 
 public class LoginViewModel extends AndroidViewModel {
-    private MutableLiveData<Boolean> loginResult = new MutableLiveData<>();
-    private UserRepository userRepository;
+    private final MutableLiveData<Boolean> loginResult = new MutableLiveData<>();
+    private final UserRepository userRepository;
+
+    // Expose LiveData for username and password to observe their changes
+    private final MutableLiveData<String> username = new MutableLiveData<>();
+    private final MutableLiveData<String> password = new MutableLiveData<>();
+
+    public LoginViewModel(@NonNull Application application) {
+        super(application);
+        userRepository = new UserRepository(application);
+    }
 
     public LiveData<Boolean> getLoginResult() {
         return loginResult;
     }
 
-    public final ObservableField<String> Username = new ObservableField<>();
-    public final ObservableField<String> Password = new ObservableField<>();
-
-    public ICommand loginCommand;
-
-    public ICommand signOutCommand;
-
-    public LoginViewModel(@NonNull Application application) {
-        super(application);
-
-        loginCommand = new LoginCommand(() -> login(Username, Password));
-        signOutCommand = new SignOutCommand(() -> signOut());
-        this.userRepository = new UserRepository(application);
-
-        loginResult.setValue(false);
-        Username.set("");
-        Password.set("");
+    public MutableLiveData<String> getUsername() {
+        return username;
     }
 
-    public void login(ObservableField<String> Username, ObservableField<String> Password) {
-        userRepository.login(Username.get(), Password.get());
-        loginResult.setValue(true);
+    public MutableLiveData<String> getPassword() {
+        return password;
+    }
+
+    public void setUsername(String username) {
+        this.username.setValue(username);
+    }
+
+    public void setPassword(String password) {
+        this.password.setValue(password);
+    }
+
+    // Call this method when the login button is clicked
+    public void login() {
+        String user = username.getValue();
+        String pass = password.getValue();
+        LiveData<Boolean> repoResult = userRepository.login(user, pass);
+        repoResult.observeForever(isSuccess -> loginResult.setValue(isSuccess));
     }
 
     public void signOut() {
-        UserRepository.signOut();
-    }
-
-
-    public void onLoginClicked() {
-        if (((LoginCommand)loginCommand).canExecute()) {
-            loginCommand.execute();
-        }
     }
 }

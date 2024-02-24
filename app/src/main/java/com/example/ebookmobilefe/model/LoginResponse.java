@@ -6,15 +6,7 @@ public class LoginResponse {
     private String status;
     private int code;
     private String message;
-    private Data data;
-
-    // Constructor
-    public LoginResponse(String status, int code, String message, Data data) {
-        this.status = status;
-        this.code = code;
-        this.message = message;
-        this.data = data;
-    }
+    private TokenData data;
 
     // Getters and Setters
     public String getStatus() {
@@ -41,40 +33,15 @@ public class LoginResponse {
         this.message = message;
     }
 
-    public Data getData() {
+    public TokenData getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(TokenData data) {
         this.data = data;
     }
 
-    // Nested Data class
-    public static class Data {
-        private String accessToken;
-        private String refreshToken;
-
-        // Constructor
-        public Data(String accessToken, String refreshToken) {
-            this.accessToken = accessToken;
-            this.refreshToken = refreshToken;
-        }
-
-        // Getters and Setters
-        public String getAccessToken() {
-            return accessToken;
-        }
-
-        public void setAccessToken(String accessToken) {
-            this.accessToken = accessToken;
-        }
-
-        public String getRefreshToken() {
-            return refreshToken;
-        }
-
-        public void setRefreshToken(String refreshToken) {
-            this.refreshToken = refreshToken;
-        }
+    public boolean isSuccess() {
+        return code == 200;
     }
 }

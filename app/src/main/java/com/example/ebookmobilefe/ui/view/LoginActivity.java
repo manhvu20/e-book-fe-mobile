@@ -2,6 +2,7 @@ package com.example.ebookmobilefe.ui.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         binding.setLoginViewModel(viewModel);
         binding.setLifecycleOwner(this);
+
         viewModel.getLoginResult().observe(this, isSuccess -> {
             if (isSuccess) {
                 Intent intent = new Intent(this, MainActivity.class);
