@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.ebookmobilefe.model.LoginRequest;
 import com.example.ebookmobilefe.model.LoginResponse;
-import com.example.ebookmobilefe.model.User;
 import com.example.ebookmobilefe.network.LoginService;
 import com.example.ebookmobilefe.network.RetrofitInstance;
 
@@ -17,7 +16,7 @@ import retrofit2.Response;
 
 public class UserRepository {
     private Application application;
-    private MutableLiveData<LoginResponse> mutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<LoginResponse> mutableLiveData;
 
     public UserRepository(Application application) {
         this.application = application;
@@ -30,30 +29,25 @@ public class UserRepository {
         return mutableLiveData;
     }
 
-    public MutableLiveData<Boolean> login(String username, String password) {
-        MutableLiveData<Boolean> loginResult = new MutableLiveData<>();
+    public void login(String username, String password) {
+        mutableLiveData = new MutableLiveData<>();
         LoginService loginService = RetrofitInstance.getRetrofitInstance().create(LoginService.class);
-
         LoginRequest request = new LoginRequest(username, password);
+
         loginService.loginUser(request).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // Handle successful response
-                    loginResult.setValue(true);
+                    mutableLiveData.postValue(response.body());
                 } else {
-                    // Handle unsuccessful response, e.g., wrong credentials
-                    loginResult.setValue(false);
+                    Log.e("Login Error", "Failed to login");
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                // Handle network failure or other system issues
-                loginResult.setValue(false);
+                Log.e("Retrofit Error", t.toString());
             }
         });
-
-        return loginResult;
     }
 }

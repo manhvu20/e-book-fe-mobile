@@ -28,19 +28,17 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        viewModel = new ViewModelProvider(this)
-                .get(LoginViewModel.class);
+        ActivityLoginBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
-        // Set the ViewModel to the binding
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         binding.setLoginViewModel(viewModel);
-
-        viewModel.getNavigateToMain().observe(this, navigate -> {
-            if (Boolean.TRUE.equals(navigate)) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        binding.setLifecycleOwner(this);
+        viewModel.getLoginResult().observe(this, isSuccess -> {
+            if (isSuccess) {
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                finish();
+            } else {
+                Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show();
             }
         });
     }

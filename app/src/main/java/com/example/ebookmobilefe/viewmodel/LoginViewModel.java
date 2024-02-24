@@ -30,17 +30,19 @@ public class LoginViewModel extends AndroidViewModel {
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
+
         loginCommand = new LoginCommand(() -> login(Username, Password));
         signOutCommand = new SignOutCommand(() -> signOut());
         this.userRepository = new UserRepository(application);
+
+        loginResult.setValue(false);
         Username.set("");
         Password.set("");
     }
 
     public void login(ObservableField<String> Username, ObservableField<String> Password) {
-        userRepository.login(Username.get(), Password.get()).observe(getApplication(), loginResponse -> {
-            loginResult.setValue(true);
-        });
+        userRepository.login(Username.get(), Password.get());
+        loginResult.setValue(true);
     }
 
     public void signOut() {
@@ -52,9 +54,5 @@ public class LoginViewModel extends AndroidViewModel {
         if (((LoginCommand)loginCommand).canExecute()) {
             loginCommand.execute();
         }
-    }
-
-    public LiveData<Boolean> getNavigateToMain() {
-        return loginResult;
     }
 }
