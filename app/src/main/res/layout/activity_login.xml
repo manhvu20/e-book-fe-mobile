@@ -5,30 +5,72 @@
             name="loginViewModel"
             type="com.example.ebookmobilefe.viewmodel.LoginViewModel" />
     </data>
-    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
-        <EditText
-            android:text="@={loginViewModel.Username}"
-            android:id="@+id/etUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/username"
-            />
-
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:text="@={loginViewModel.Password}" />
-
-        <Button
-            android:id="@+id/btnLogin"
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/textViewHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:text="E-book System"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/textViewSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewHeader"
+            android:text="Create an account"
+            android:textSize="16sp"/>
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@={loginViewModel.Username}"
+            android:layout_below="@id/textViewSubtitle"
+            android:hint="Enter email"
+            android:inputType="textEmailAddress"/>
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextEmail"
+            android:hint="Enter password"
+            android:text="@={loginViewModel.Password}"
+            android:inputType="textPassword"/>
+
+        <TextView
+            android:id="@+id/textViewForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextPassword"
+            android:text="Forgot password?"
+            android:textSize="14sp"/>
+
+        <Button
+            android:id="@+id/buttonSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            android:layout_below="@id/textViewForgotPassword"
             android:onClick="@{() -> loginViewModel.login()}"
-            />
-    </LinearLayout>
+            android:text="Đăng nhập"/>
+
+
+        <Button
+            android:id="@+id/buttonGoogleSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonSignUp"
+            android:text="Đăng nhập với Google"
+            android:drawableLeft="@drawable/ic_google_logo"/>
+
+        <TextView
+            android:id="@+id/textViewSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonGoogleSignUp"
+            android:text="Don't have an account? Sign up"
+            android:textSize="14sp"/>
+    </RelativeLayout>
 </layout>
