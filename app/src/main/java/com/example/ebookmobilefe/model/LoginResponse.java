@@ -1,47 +1,17 @@
 package com.example.ebookmobilefe.model;
 
-
 public class LoginResponse {
+    private String token;
+    private String userId;
 
-    private String status;
-    private int code;
-    private String message;
-    private TokenData data;
-
-    // Getters and Setters
-    public String getStatus() {
-        return status;
+    public LoginResponse(String token, String userId) {
+        this.token = token;
+        this.userId = userId;
     }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public String getToken() {
+        return token;
     }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public TokenData getData() {
-        return data;
-    }
-
-    public void setData(TokenData data) {
-        this.data = data;
-    }
-
-    public boolean isSuccess() {
-        return code == 200;
+    public String getUserId() {
+        return userId;
     }
 }
