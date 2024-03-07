@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.view.CartActivity"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Shopping Cart"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+    <View
+        android:id="@+id/viewRectangle"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rectangle_shape"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/cbAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="All (0 product)"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+        <ImageButton
+            android:id="@+id/btnRemove"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:contentDescription="Xóa khỏi giỏ hàng"
+            android:src="@mipmap/ic_bin"
+            android:layout_marginStart="180dp"/>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/ivCart"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="cart is empty"
+        android:src="@drawable/cart"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/tvNotify1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Nothing's in your cart!"
+        android:layout_gravity="center"
+        android:textSize="18dp"/>
+    <TextView
+        android:id="@+id/tvNotify2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Please select some products and get back later!"
+        android:layout_gravity="center"
+        android:textSize="18dp"/>
+    <Button
+        android:id="@+id/btnBackHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="30dp"
+        android:background="#00A6FF"
+        android:text="Go back to Home Page"
+        android:textColor="#FFFFFF"
+        android:textSize="19dp"/>
+</LinearLayout>
