@@ -1,13 +1,10 @@
 package com.example.ebookmobilefe.repository;
 
-import android.app.Application;
-import android.util.Log;
-
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.ebookmobilefe.model.LoginRequest;
 import com.example.ebookmobilefe.model.LoginResponse;
+import com.example.ebookmobilefe.model.User;
 import com.example.ebookmobilefe.network.LoginService;
 import com.example.ebookmobilefe.network.RetrofitInstance;
 
@@ -16,31 +13,29 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserRepository {
-    private Application application;
 
-    public UserRepository(Application application) {
-        this.application = application;
+    public MutableLiveData<User> getUserData(String userId) {
+        MutableLiveData<User> userData = new MutableLiveData<>();
+        // Implement logic to fetch user data
+        return userData;
     }
 
-    public LiveData<Boolean> login(String username, String password) {
-        final MutableLiveData<Boolean> loginResult = new MutableLiveData<>();
-
+    public MutableLiveData<Boolean> login(String username, String password) {
+        MutableLiveData<Boolean> loginResult = new MutableLiveData<>();
         LoginService loginService = RetrofitInstance.getRetrofitInstance().create(LoginService.class);
-        LoginRequest request = new LoginRequest(username, password);
-
-        loginService.loginUser(request).enqueue(new Callback<LoginResponse>() {
+        loginService.loginUser(new LoginRequest(username, password)).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
-                    loginResult.postValue(true);
+                if (response.isSuccessful()) {
+                    loginResult.setValue(true);
                 } else {
-                    loginResult.postValue(false);
+                    loginResult.setValue(false);
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                loginResult.postValue(false);
+                loginResult.setValue(false);
             }
         });
 
