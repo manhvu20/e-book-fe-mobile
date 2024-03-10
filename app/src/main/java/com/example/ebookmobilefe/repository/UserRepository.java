@@ -23,7 +23,6 @@ public class UserRepository {
     public MutableLiveData<Boolean> login(String username, String password) {
         MutableLiveData<Boolean> loginResult = new MutableLiveData<>();
         LoginService loginService = RetrofitInstance.getRetrofitInstance().create(LoginService.class);
-
         loginService.loginUser(new LoginRequest(username, password)).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
