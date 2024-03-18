@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/main"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+
+    tools:context=".ui.view.Edit_Ebook">
+
+
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:layout_marginStart="16dp"
+android:layout_marginTop="16dp"
+android:layout_marginEnd="16dp"
+android:layout_marginBottom="16dp"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent">
+
+<!-- Biểu tượng quyển sách -->
+
+<!-- Văn bản -->
+<ImageView
+    android:layout_width="94dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:layout_marginEnd="5dp"
+    android:src="@drawable/ic_book" />
+
+<TextView
+    android:id="@+id/tvHeader"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text=" Edit EBook"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    android:layout_gravity="center_vertical"/>
+
+
+
+
+</LinearLayout>
+
+<TextView
+android:id="@+id/tvEbookNameEdit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="10dp"
+android:text="Ebook Name" />
+
+<EditText
+android:id="@+id/edEbookNameEdit"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="5dp"
+android:ems="10"
+android:inputType="text" />
+
+<TextView
+android:id="@+id/tvAuthorEdit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="10dp"
+android:text="Author" />
+
+
+<EditText
+android:id="@+id/edAuthorEdit"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="5dp"
+android:ems="10"
+android:inputType="text"
+
+    />
+<TextView
+android:id="@+id/tvContentEdit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="10dp"
+android:text="Content"
+
+
+    />
+
+
+<EditText
+android:id="@+id/edAContentEdit"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="5dp"
+android:ems="10"
+android:inputType="text"
+
+    />
+    <TextView
+        android:id="@+id/tvBookPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Price" />
+
+    <EditText
+        android:id="@+id/edBookPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+
+<TextView
+android:id="@+id/tvCategoryEdit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="10dp"
+android:text="Category" />
+
+
+
+
+<Spinner
+android:id="@+id/spCategoryEdit"
+android:layout_width="300dp"
+android:layout_height="20dp"
+android:layout_marginLeft="16dp"
+android:layout_marginRight="16dp"
+android:layout_marginTop="5dp" />
+
+<TextView
+android:id="@+id/tvBookFileEdit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="16dp"
+android:text="Book File" />
+
+<Button
+android:id="@+id/btUploadBookFileEdit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Upload Book File"
+android:onClick="onClick_btUploadBookFile"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="16dp" />
+
+<TextView
+android:id="@+id/tvImageEdit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="16dp"
+android:text="Select Image" />
+
+<Button
+android:id="@+id/btUploadImageEdit"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Upload Image"
+android:onClick="onClick_btUploadImage"
+android:layout_marginLeft="16dp"
+android:layout_marginTop="16dp" />
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:gravity="center_horizontal">
+
+<Button
+    android:id="@+id/btSaveEdit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Save"
+    android:layout_margin="16dp"/>
+
+<Button
+    android:id="@+id/btCancelEdit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Cancel"
+    android:layout_margin="16dp"/>
+</LinearLayout>
+
+
+    </LinearLayout>

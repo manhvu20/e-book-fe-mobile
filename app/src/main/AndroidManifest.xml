@@ -13,7 +13,23 @@
         android:theme="@style/Theme.EbookMobileFE"
         tools:targetApi="31">
         <activity
+            android:name=".ui.view.List_Ebook"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.view.Edit_Ebook"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.Add_Book"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.Book_management"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.view.List_Category"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

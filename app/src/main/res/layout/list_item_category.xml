@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- ImageView để hiển thị biểu tượng hoặc hình ảnh của thể loại sách -->
+        <TextView
+            android:id="@+id/tvidCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="1"
+            android:textSize="15sp"
+            android:layout_gravity="center_vertical"/>
+
+        <!-- TextView để hiển thị tên thể loại sách -->
+        <TextView
+            android:id="@+id/tvCategoryNameList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category Name"
+            android:textSize="15sp"
+            android:layout_marginStart="16dp"
+            android:layout_gravity="center_vertical"/>
+
+        <!-- LinearLayout chứa ImageButton -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <!-- Nút chỉnh sửa -->
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="onEditButtonClicked"
+                android:padding="3dp"
+                android:src="@drawable/ic_edit" />
+
+            <!-- Nút xóa -->
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:onClick="onDeleteButtonClicked"
+                android:padding="3dp"
+                android:src="@drawable/ic_delete" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
