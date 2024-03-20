@@ -1,14 +1,19 @@
 package com.example.ebookmobilefe.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.ebookmobilefe.R;
+import com.example.ebookmobilefe.model.Book;
+import com.example.ebookmobilefe.ui.adapter.ListBookAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +22,9 @@ import com.example.ebookmobilefe.R;
  */
 public class ShoppingCartFragment extends Fragment {
 
+    ListView lvCart;
+    public static List<Book> cartData = new ArrayList<>();
+    ListBookAdapter gvAdapter;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,6 +69,25 @@ public class ShoppingCartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+        View view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+        setControl(view);
+        setEvent();
+        return view;
+    }
+
+    private void setEvent() {
+        Book book = new Book();
+        book.setBookID("001");
+        book.setTitle("Love is all");
+        book.setAuthorID("01");
+        book.setImage("...");
+        book.setPrice(90000);
+        cartData.add(book);
+        //gvAdapter = new ListBookAdapter(getContext(), R.layout.activity_cart_1, cartData);
+        //lvCart.setAdapter(gvAdapter);
+    }
+
+    private void setControl(View view) {
+        lvCart = view.findViewById(R.id.lvCart);
     }
 }

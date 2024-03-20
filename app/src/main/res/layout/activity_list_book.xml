@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="ListBookViewModel"
+            type="com.example.ebookmobilefe.viewmodel.ListBookViewModel" />
+    </data>
+<LinearLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.ListBookActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    tools:context=".ui.view.ListBookActivity">
+
     <TextView
         android:id="@+id/tvHeader"
         android:layout_width="match_parent"
@@ -14,79 +22,11 @@
         android:layout_marginTop="16dp"
         android:textSize="30sp"
         android:textStyle="bold"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/ivBook"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_launcher_background" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Love is all"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"/>
-            <TextView
-                android:id="@+id/tvAuthor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Olivia"
-                android:textColor="#888787"
-                android:textSize="15dp"/>
-            <TextView
-                android:id="@+id/tvContent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="A tapestry woven from the..."
-                android:textSize="15dp"/>
-            <me.zhanghai.android.materialratingbar.MaterialRatingBar
-                android:id="@+id/ratingBar"
-                android:layout_width="130dp"
-                android:layout_height="22dp"
-                android:layout_marginStart="16dp"
-                android:isIndicator="true"
-                android:numStars="5"
-                android:rating="0"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/ic_add_to_cart"
-                android:background="?android:attr/selectableItemBackground"
-                android:contentDescription="Thêm vào giỏ hàng"
-                android:id="@+id/btnAddCart"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvPrice"
-                android:text="90.000 đ"
-                android:textStyle="bold"
-                android:textColor="#00BCD4"
-                android:textSize="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_gravity="end"/>
-        </LinearLayout>
 
-    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvListBook"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
+</layout>

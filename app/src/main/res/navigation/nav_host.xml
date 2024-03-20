@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_host.xml"
+    app:startDestination="@id/loginActivity">
+
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.ebookmobilefe.ui.view.LoginActivity"
+        android:label="LoginActivity" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.ebookmobilefe.ui.view.MainActivity"
+        android:label="MainActivity" />
+    <activity
+        android:id="@+id/listBookActivity"
+        android:name="com.example.ebookmobilefe.ui.view.ListBookActivity"
+        android:label="ListBookActivity" />
+</navigation>
