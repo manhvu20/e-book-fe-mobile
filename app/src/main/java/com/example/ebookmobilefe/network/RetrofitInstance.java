@@ -16,4 +16,8 @@ public class RetrofitInstance {
         }
         return retrofit;
     }
+
+    public static OrderService getOrderService() {
+        return getRetrofitInstance().create(OrderService.class);
+    }
 }
